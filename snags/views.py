@@ -175,12 +175,16 @@ class CreateSnagView(APIView):
             )
 
         serializer = SnagSerializer(
-            snag
-        )
+    snag,
+    context={"request": request}
+)
 
         return Response(
-            serializer.data
-        )
+    SnagSerializer(
+        serializer.instance,
+        context={"request": request}
+    ).data
+)
         
 class SnagListView(APIView):
 
@@ -193,9 +197,10 @@ class SnagListView(APIView):
         snags = Snag.objects.all()
 
         serializer = SnagSerializer(
-            snags,
-            many=True
-        )
+    snags,
+    many=True,
+    context={"request": request}
+)
 
         return Response(
             serializer.data
@@ -390,9 +395,10 @@ class ClientSnagListView(
         )
 
         serializer = SnagSerializer(
-            snags,
-            many=True
-        )
+    snags,
+    many=True,
+    context={"request": request}
+)
 
         return Response(
             serializer.data

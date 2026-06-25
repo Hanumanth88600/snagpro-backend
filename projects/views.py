@@ -33,32 +33,38 @@ class CreateProjectView(APIView):
 
         print("REQUEST DATA =", request.data)
 
-        data = request.data.copy()
+        try:
 
-        data["company"] = (
-            request.user.company.id
-        )
+            data = request.data.copy()
 
-        serializer = ProjectSerializer(
-            data=data
-        )
+            print("USER =", request.user)
+            print("COMPANY =", request.user.company)
 
-        serializer.is_valid(
-            raise_exception=True
-        )
+            data["company"] = request.user.company.id
 
-        project = serializer.save()
+            serializer = ProjectSerializer(data=data)
 
-        print(
-            "CLIENT SAVED =",
-            project.client
-        )
+            if not serializer.is_valid():
+                print(serializer.errors)
+                return Response(serializer.errors, status=400)
 
-        return Response(
-            ProjectSerializer(
-                project
-            ).data
-        )
+            project = serializer.save()
+
+            print("PROJECT CREATED =", project.id)
+
+            return Response(ProjectSerializer(project).data)
+
+        except Exception as e:
+
+            import traceback
+            traceback.print_exc()
+
+            return Response(
+                {
+                    "error": str(e)
+                },
+                status=500
+            )
         
 class ProjectListView(APIView):
 
