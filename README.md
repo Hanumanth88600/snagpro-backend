@@ -1,15 +1,27 @@
-````markdown
 # 🚀 SnagPro Backend
 
-A robust **Django REST Framework** backend powering the **SnagPro Construction Snagging & Inspection Management System**.
+<p align="center">
 
-The backend provides secure REST APIs for authentication, company management, project management, inspections, snag tracking, staff management, and role-based access control using JWT authentication.
+A robust <strong>Django REST Framework</strong> backend powering the <strong>SnagPro Construction Snagging & Inspection Management System</strong>.
+
+</p>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/Python-3.12-blue?logo=python">
+<img src="https://img.shields.io/badge/Django-6.0-success?logo=django">
+<img src="https://img.shields.io/badge/Django_REST_Framework-API-red">
+<img src="https://img.shields.io/badge/PostgreSQL-Neon-336791?logo=postgresql">
+<img src="https://img.shields.io/badge/JWT-Authentication-orange">
+<img src="https://img.shields.io/badge/Render-Deployed-46E3B7?logo=render">
+
+</p>
 
 ---
 
 # 🌐 Live API
 
-Backend API
+**Backend URL**
 
 https://snagpro-backend.onrender.com
 
@@ -17,77 +29,63 @@ https://snagpro-backend.onrender.com
 
 # 📖 About
 
-The SnagPro backend is designed to support construction companies in managing projects, inspections, defects (snags), contractors, engineers, and clients through a secure REST API.
+**SnagPro Backend** provides secure REST APIs for managing construction projects, inspections, snags, contractors, engineers, and clients.
 
-It provides scalable APIs with role-based authorization, JWT authentication, PostgreSQL database integration, media upload support, and deployment-ready architecture.
+It is built with **Django REST Framework**, secured using **JWT Authentication**, connected to a **PostgreSQL (Neon)** database, and deployed on **Render**.
 
 ---
 
 # 🎯 Objectives
 
-- Secure REST APIs
-- JWT Authentication
-- Company-based multi-user system
-- Project Management
-- Inspection Management
-- Snag Tracking
-- Staff Management
-- Contractor Assignment
-- Client Access
-- PostgreSQL Database
-- Production Ready Deployment
+* 🔐 Secure REST APIs
+* 🏗 Company-based Project Management
+* 👷 Staff & Contractor Management
+* 📋 Inspection Management
+* 🚧 Snag Tracking
+* 📷 Image Upload Support
+* 📊 Scalable Architecture
+* ☁️ Cloud Deployment
 
 ---
 
 # ✨ Features
 
-- 🔐 JWT Authentication
-- 👨‍💼 Company Admin Management
-- 👷 Engineer Management
-- 🔨 Contractor Management
-- 👤 Client Management
-- 🏗 Company Registration
-- 📁 Project CRUD APIs
-- 📋 Inspection CRUD APIs
-- 🚧 Snag CRUD APIs
-- 📷 Image Upload Support
-- 👤 Profile Management
-- 🔑 Change Password API
-- 🛡 Role-Based Permissions
-- 📦 PostgreSQL Database
-- 🌍 CORS Enabled
-- ☁️ Render Deployment Ready
+* 🔐 JWT Authentication
+* 👨‍💼 Company Admin Management
+* 👷 Engineer Management
+* 🔨 Contractor Management
+* 👤 Client Management
+* 🏢 Company Registration
+* 📁 Project CRUD APIs
+* 📋 Inspection CRUD APIs
+* 🚧 Snag CRUD APIs
+* 📷 Image Upload
+* 👤 Profile Management
+* 🔑 Change Password
+* 🛡 Role-Based Permissions
+* 🗄 PostgreSQL Database
+* 🌍 CORS Enabled
+* ☁️ Render Deployment Ready
 
 ---
 
-# 🏗 Backend Architecture
+# 🏗 System Architecture
 
 ```mermaid
-graph TD
+graph LR
 
-Client
+A[React Frontend]
+--> B[Axios]
 
---> DjangoAPI
+B --> C[Django REST API]
 
-DjangoAPI
+C --> D[JWT Authentication]
 
---> JWT Authentication
+C --> E[Business Logic]
 
-JWT Authentication
+E --> F[PostgreSQL Database]
 
---> Permission Classes
-
-Permission Classes
-
---> Business Logic
-
-Business Logic
-
---> PostgreSQL Database
-
-Business Logic
-
---> Media Storage
+E --> G[Media Upload]
 ```
 
 ---
@@ -95,27 +93,18 @@ Business Logic
 # 🔐 Authentication Flow
 
 ```mermaid
-flowchart TD
+flowchart LR
 
-Login
+A[User Login]
+--> B[Validate Credentials]
 
---> ValidateUser
+B --> C[Generate JWT]
 
-ValidateUser
+C --> D[Access Token]
 
---> GenerateJWT
+D --> E[Protected APIs]
 
-GenerateJWT
-
---> AccessToken
-
-AccessToken
-
---> ProtectedAPI
-
-ProtectedAPI
-
---> Database
+E --> F[Database]
 ```
 
 ---
@@ -126,31 +115,21 @@ ProtectedAPI
 flowchart LR
 
 Company
-
 --> Staff
 
 Staff
-
 --> Projects
 
 Projects
-
 --> Inspections
 
 Inspections
-
 --> Snags
 
 Snags
-
---> Images
-
-Snags
-
 --> Contractors
 
 Contractors
-
 --> Client
 ```
 
@@ -162,13 +141,9 @@ Contractors
 erDiagram
 
 COMPANY ||--o{ USER : has
-
 COMPANY ||--o{ PROJECT : owns
-
 PROJECT ||--o{ INSPECTION : contains
-
 INSPECTION ||--o{ SNAG : has
-
 SNAG ||--o{ IMAGE : stores
 ```
 
@@ -176,32 +151,17 @@ SNAG ||--o{ IMAGE : stores
 
 # 🛠 Tech Stack
 
-## Backend
-
-- Python
-- Django
-- Django REST Framework
-- JWT Authentication
-- Gunicorn
-
-## Database
-
-- PostgreSQL
-- Neon Database
-
-## Deployment
-
-- Render
-
-## Libraries
-
-- Django REST Framework
-- Simple JWT
-- Pillow
-- WhiteNoise
-- dj-database-url
-- python-decouple
-- psycopg2-binary
+| Category             | Technologies          |
+| -------------------- | --------------------- |
+| **Language**         | Python                |
+| **Framework**        | Django                |
+| **API**              | Django REST Framework |
+| **Authentication**   | JWT (Simple JWT)      |
+| **Database**         | PostgreSQL (Neon)     |
+| **Deployment**       | Render                |
+| **WSGI**             | Gunicorn              |
+| **Static Files**     | WhiteNoise            |
+| **Media Processing** | Pillow                |
 
 ---
 
@@ -214,12 +174,9 @@ backend/
 ├── companies/
 ├── projects/
 ├── snags/
-│
 ├── config/
-│
 ├── media/
 ├── staticfiles/
-│
 ├── manage.py
 ├── requirements.txt
 ├── Procfile
@@ -230,47 +187,45 @@ backend/
 
 # 🚀 Installation
 
-Clone Repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/Hanumanth88600/snagpro-backend.git
 ```
 
-Move into project
+### Navigate to Project
 
 ```bash
 cd snagpro-backend
 ```
 
-Create Virtual Environment
+### Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate Environment
+### Activate Environment
 
-### Windows
+**Windows**
 
 ```bash
 venv\Scripts\activate
 ```
 
-### Linux / macOS
+**Linux / macOS**
 
 ```bash
 source venv/bin/activate
 ```
 
-Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create Environment Variables
-
-Create a `.env` file
+### Create `.env`
 
 ```env
 SECRET_KEY=your_secret_key
@@ -280,13 +235,13 @@ DEBUG=True
 DATABASE_URL=your_database_url
 ```
 
-Run Migrations
+### Apply Migrations
 
 ```bash
 python manage.py migrate
 ```
 
-Run Development Server
+### Run Server
 
 ```bash
 python manage.py runserver
@@ -296,74 +251,48 @@ python manage.py runserver
 
 # 🔐 Authentication
 
-Authentication is implemented using **JWT**.
+The backend uses **JWT Authentication**.
 
-Login Endpoint
+### Login Endpoint
 
+```http
+POST /accounts/login/
 ```
-POST /api/accounts/login/
-```
 
-Returns
+### Response
 
-- Access Token
-- Refresh Token
-- User Information
+* Access Token
+* Refresh Token
+* User Information
 
-Protected APIs require:
+### Protected Requests
 
-```
+```http
 Authorization: Bearer <access_token>
 ```
 
 ---
 
-# 📡 Main API Modules
+# 📡 API Modules
 
-## Accounts
-
-- Login
-- Profile
-- Update Profile
-- Change Password
-- Staff CRUD
-
-## Companies
-
-- Company CRUD
-
-## Projects
-
-- Project CRUD
-
-## Inspections
-
-- Inspection CRUD
-
-## Snags
-
-- Snag CRUD
-- Image Upload
+| Module      | Features                                    |
+| ----------- | ------------------------------------------- |
+| Accounts    | Login, Profile, Change Password, Staff CRUD |
+| Companies   | Company CRUD                                |
+| Projects    | Project CRUD                                |
+| Inspections | Inspection CRUD                             |
+| Snags       | Snag CRUD, Image Upload                     |
 
 ---
 
 # 🌍 Deployment
 
-Backend
-
-- Render
-
-Database
-
-- Neon PostgreSQL
-
-Static Files
-
-- WhiteNoise
-
-WSGI Server
-
-- Gunicorn
+| Service      | Platform        |
+| ------------ | --------------- |
+| Backend      | Render          |
+| Database     | Neon PostgreSQL |
+| Static Files | WhiteNoise      |
+| WSGI Server  | Gunicorn        |
 
 ---
 
@@ -377,25 +306,25 @@ https://github.com/Hanumanth88600/snagpro-frontend
 
 **Hanumanth H**
 
-MCA Graduate
+🎓 MCA Graduate
 
-Python Full Stack Developer
+💻 Python Full Stack Developer
 
 ---
 
 # 📫 Connect With Me
 
-### LinkedIn
+**LinkedIn**
 
 https://www.linkedin.com/in/hanumanthappah-3759b4367/
 
-### GitHub
+**GitHub**
 
 https://github.com/Hanumanth88600
 
-### Email
+**Email**
 
-hanumanthappah5258@gmail.com
+[hanumanthappah5258@gmail.com](mailto:hanumanthappah5258@gmail.com)
 
 ---
 
@@ -407,5 +336,4 @@ If you found this project useful, please consider giving it a ⭐ on GitHub.
 
 # 📄 License
 
-This project is developed for educational, learning, and portfolio purposes.
-````
+This project is developed for **educational, learning, and portfolio purposes**.
